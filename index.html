@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Specchio 2: La Strega</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div id="mirror-app-container">
+
+    <!-- Overlay per avviare l'audio/video -->
+    <div id="armOverlay" class="glass-panel">
+        <button id="armBtn">Avvia Sistema</button>
+    </div>
+
+    <!-- Fotocamera per VAD (Fa anche da Specchio) -->
+    <video id="webcam" autoplay playsinline muted></video>
+
+    <!-- Pulsante Avvio Sessione Visitatore -->
+    <button id="triggerSessionBtn" style="display:none;">Specchio Parlante</button>
+
+    <!-- UI Hologram e Fiamma -->
+    <div id="hologramUI" class="hidden">
+        <div class="fire-container">
+            <div class="ghost-wrapper" id="ghost-wrapper">
+                <video id="video-inizio" src="inizio.mp4" playsinline preload="auto" class="ectoplasm-video hidden"></video>
+                <video id="video-durante" src="durante.mp4" playsinline loop preload="auto" class="ectoplasm-video hidden"></video>
+                <video id="video-fine" src="fine.mp4" playsinline preload="auto" class="ectoplasm-video hidden"></video>
+                <video id="ghost-video" src="ghost_video.mp4" playsinline loop muted preload="auto" class="ectoplasm-video hidden"></video>
+            </div>
+        </div>
+        <div id="micStatus" class="pulse-text hidden"><div class="mic-dot"></div> Ascolto dal vivo...</div>
+    </div>
+
+    </div>
+    <script src="main.js"></script>
+</body>
+</html>

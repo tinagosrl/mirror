@@ -1,0 +1,184 @@
+body, html {
+    margin: 0;
+    padding: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: #000;
+    color: #fff;
+    font-family: 'Times New Roman', serif;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* CONTAINER PRINCIPALE PER FORZARE I 9:16 SU TUTTO */
+#mirror-app-container {
+    position: relative;
+    height: 100vh;
+    max-height: 100vh;
+    aspect-ratio: 9 / 16;
+    background-color: #050505;
+    overflow: hidden;
+    box-shadow: 0 0 50px rgba(0,255,0,0.1);
+}
+
+.hidden {
+    display: none !important;
+}
+
+/* TELECAMERA (Fa da Specchio di sfondo) */
+#webcam {
+    position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+    object-fit: cover; z-index: 1;
+    transform: scaleX(-1);
+    filter: brightness(1.05) contrast(1.05);
+    transition: filter 2s ease;
+}
+body.ghost-active #webcam { filter: brightness(0.45) contrast(1.3) grayscale(0.2); }
+
+/* ARM OVERLAY */
+#armOverlay {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: rgba(5, 20, 5, 0.8);
+    backdrop-filter: blur(10px);
+    padding: 3rem;
+    border-radius: 15px;
+    border: 1px solid rgba(0, 255, 0, 0.2);
+    text-align: center;
+    z-index: 1000;
+}
+#armBtn {
+    padding: 15px 30px;
+    font-size: 1.2rem;
+    background: #004d00;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    box-shadow: 0 0 20px rgba(0, 255, 0, 0.4);
+    transition: all 0.3s ease;
+}
+#armBtn:hover {
+    background: #008000;
+    box-shadow: 0 0 30px rgba(0, 255, 0, 0.8);
+}
+
+/* HOLOGRAM UI */
+#hologramUI {
+    position: absolute; top: 0; left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background: rgba(0, 15, 0, 0.45); /* Meno scuro per mostrare meglio lo specchio */
+    backdrop-filter: blur(5px);
+    z-index: 20;
+}
+
+/* CONTAINER FIAMME E VIDEO */
+.fire-container {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* GHOST CONTAINER - Mix Blend Screen per rimuovere il nero */
+.ghost-wrapper {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1;
+    transform: scale(0.95);
+    transition: transform 1.5s ease-in-out;
+    mix-blend-mode: screen; /* IL NERO DIVENTA TRASPARENTE! */
+}
+
+/* CLASSI PER I VIDEO ECTOPLASMA MULTIPLI */
+.ectoplasm-video {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: contain; 
+    opacity: 0.4; /* Opacità per ectoplasma */
+    filter: contrast(1.1) brightness(1.0);
+    transition: opacity 1s ease-in-out, filter 1s ease-in-out;
+}
+
+/* FADE OUT PER DISSOLVENZE INCROCIATE JAVASCRIPT */
+.ectoplasm-video.fade-out {
+    opacity: 0 !important;
+}
+
+/* STATO APPARIZIONE E VOCALE (Pulsazione leggera) */
+.ghost-wrapper.speaking {
+    transform: scale(1.02);
+}
+
+.ghost-wrapper.speaking #ghost-video {
+    filter: contrast(1.3) brightness(1.3);
+}
+
+/* MIC STATUS */
+#micStatus {
+    position: absolute;
+    bottom: 3vh;
+    font-size: 1.5rem;
+    font-style: italic;
+    color: #44ff44;
+    text-shadow: 0 0 10px #00ff00;
+    z-index: 10;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+.mic-dot {
+    width: 15px;
+    height: 15px;
+    background: red;
+    border-radius: 50%;
+    animation: blink 1.5s infinite;
+}
+@keyframes blink {
+    0% { opacity: 0.3; }
+    50% { opacity: 1; }
+}
+
+/* TASTO AVVIO (Specchio Parlante) */
+#triggerSessionBtn {
+    position: absolute;
+    bottom: 50px;
+    right: 50px;
+    padding: 15px 35px;
+    font-size: 1.6rem;
+    font-family: 'Times New Roman', serif;
+    background: rgba(0, 40, 0, 0.85);
+    color: #fff;
+    border: 2px solid #00ff00;
+    border-radius: 12px;
+    cursor: pointer;
+    z-index: 500;
+    box-shadow: 0 0 25px rgba(0, 255, 0, 0.6);
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    font-weight: bold;
+    letter-spacing: 2px;
+}
+
+#triggerSessionBtn:hover {
+    background: rgba(0, 90, 0, 0.95);
+    transform: scale(1.05);
+    box-shadow: 0 0 40px rgba(0, 255, 0, 0.9);
+}
